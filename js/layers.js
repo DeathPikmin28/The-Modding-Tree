@@ -28,11 +28,14 @@ addLayer("1", {
         {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true},
-    doReset(resetingLayer) {
-        let keptMilestones = []
-        if (hasMilestone(this.layer, 2)) keptMilestones.push(2)
-        player[this.layer].milestones.push(keptMilestones)
-    },
+    doReset(layer) {
+    if (layers[layer].name == "yellow pikmin 1") {
+        player[this.layer].points = new Decimal(0)
+        player[this.layer].upgrades = []
+        player[this.layer].milestones = ["2"]
+        // reset any other values, like total and custom values
+    }
+},
     milestones: {
     0: {
         requirementDescription: "1:Find Red Onion",
@@ -68,7 +71,7 @@ addLayer("r1", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(10)
+        mult = new Decimal(100)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -213,10 +216,10 @@ addLayer("y1", {
 		points: new Decimal(1),
     }},
     color: "#4BDC13",
-    requires: new Decimal(10), // Can be a function that takes requirement increases into account
+    requires: new Decimal(5), // Can be a function that takes requirement increases into account
     resource: "pikmin 1 yellow pikmin", // Name of prestige currency
-    baseResource: "skill", // Name of resource prestige is based on
-    baseAmount() {return player.points}, // Get the current amount of baseResource
+    baseResource: "pikmin 1 progress", // Name of resource prestige is based on
+    baseAmount() {return player["1"].points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses

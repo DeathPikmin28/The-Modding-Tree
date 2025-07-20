@@ -42,10 +42,25 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
-	if (hasUpgrade("r1", "11")) gain = gain.times(upgradeEffect("r1", "11"))
+	let pow = new Decimal(1)
+	if (hasUpgrade("r1", "15")) pow = pow.times(upgradeEffect("r1", "15"))
+	if (hasUpgrade("r1", "25")) pow = pow.times(upgradeEffect("r1", "25"))
+	if (hasUpgrade("y1", "15")) pow = pow.times(upgradeEffect("y1", "15"))
+	if (hasUpgrade("y1", "25")) pow = pow.times(upgradeEffect("y1", "25"))
 	if (hasUpgrade("r1", "12")) gain = gain.times(upgradeEffect("r1", "12"))
+	if (hasUpgrade("r1", "22")) gain = gain.times(upgradeEffect("r1", "22"))
+	if (hasUpgrade("y1", "12")) gain = gain.times(upgradeEffect("y1", "12"))
+	if (hasUpgrade("y1", "22")) gain = gain.times(upgradeEffect("y1", "22"))
+	gain = gain.pow(pow)
+	if (hasUpgrade("r1", "11")) gain = gain.times(upgradeEffect("r1", "11"))
 	if (hasUpgrade("r1", "13")) gain = gain.times(upgradeEffect("r1", "13"))
-	if (hasUpgrade("r1", "15")) gain = gain.pow(upgradeEffect("r1", "15"))
+	if (hasUpgrade("r1", "21")) gain = gain.times(upgradeEffect("r1", "21"))
+	if (hasUpgrade("r1", "23")) gain = gain.times(upgradeEffect("r1", "23"))
+	if (hasUpgrade("y1", "11")) gain = gain.times(upgradeEffect("y1", "11"))
+	if (hasUpgrade("y1", "13")) gain = gain.times(upgradeEffect("y1", "13"))
+	if (hasUpgrade("y1", "21")) gain = gain.times(upgradeEffect("y1", "21"))
+	if (hasUpgrade("y1", "23")) gain = gain.times(upgradeEffect("y1", "23"))
+	
 	return gain
 }
 
